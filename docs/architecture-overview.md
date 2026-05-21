@@ -7,6 +7,12 @@ This document provides a high-level architecture overview of `ktp-origin-audit` 
 `ktp-origin-audit` is a pre-judicial origin audit layer.  
 It observes trace claims, preserves uncertainty, supports review, and prepares records for downstream governance without issuing verdicts or approving allocation.
 
+In short:
+
+```text
+Origin Audit sits between trace specification and downstream governance.
+```
+
 ---
 
 ## Core Architecture
@@ -49,7 +55,7 @@ flowchart TD
 
 ### Kazene Trace Protocol
 
-The broader ecosystem for trace-related structures, claims, and governance.
+The broader ecosystem for trace-related structures, claims, review processes, and governance boundaries.
 
 ### Trace Intelligence Spec
 
@@ -61,7 +67,21 @@ It defines how trace claims can be represented.
 
 The applied pre-judicial layer.
 
-It turns trace structures into reviewable examples, validation rules, methodology, and governance boundaries.
+It turns trace structures into reviewable examples, validation rules, methodology, governance boundaries, and Multi-Wing Review examples.
+
+### Dispute Registry
+
+The downstream layer for managing formally contested trace claims.
+
+### Allocation Readiness
+
+The downstream layer for checking whether a trace claim is prepared for allocation review.
+
+### Royalty OS / Allocation Layer
+
+The downstream layer where allocation decisions may eventually occur.
+
+Origin Audit does not perform this role.
 
 ---
 
@@ -133,6 +153,8 @@ Royalty OS performs allocation.
 
 Origin Audit must not collapse into downstream authority.
 
+It may prepare records for downstream review, but it must not issue judgments, resolve disputes, determine ownership, or approve allocation.
+
 ---
 
 ## Safety Constraints
@@ -186,6 +208,14 @@ flowchart TD
     classDef danger fill:#ffd6d6,stroke:#cc0000,color:#000;
 ```
 
+The purpose of Origin Audit is to prevent unsafe shortcuts such as:
+
+```text
+similarity → copying
+trace → ownership
+readiness → payment approval
+```
+
 ---
 
 ## Multi-Wing Review Position
@@ -218,6 +248,36 @@ flowchart TD
 Multi-Wing Review improves audit quality by preserving multiple perspectives.
 
 It does not create final authority.
+
+Recommended principle:
+
+```text
+Many wings may see more clearly,
+but even many wings must not pretend to be the judge.
+```
+
+---
+
+## Repository Role
+
+`ktp-origin-audit` provides:
+
+- validated audit examples
+- Multi-Wing Review example support
+- JSON Schema validation
+- GitHub Actions validation
+- review guidelines
+- audit methodology
+- relationship documents
+- v1.0 graduation criteria
+
+It does not provide:
+
+- legal judgment
+- ownership determination
+- plagiarism ruling
+- dispute resolution
+- royalty allocation
 
 ---
 
