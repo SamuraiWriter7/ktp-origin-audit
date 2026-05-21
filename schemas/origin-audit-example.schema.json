@@ -358,10 +358,12 @@
             ],
             "properties": {
               "origin_candidate": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "observed_role": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "preliminary_weight": {
                 "type": "string",
@@ -483,10 +485,12 @@
           "minLength": 1
         },
         "source_type": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "publication_status": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "reference_url": {
           "type": "string",
@@ -496,19 +500,46 @@
       "additionalProperties": false
     },
     "origin_candidate": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/work"
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "creator",
+        "source_type",
+        "publication_status",
+        "reference_url"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
         },
-        {
-          "type": "object",
-          "properties": {
-            "observed_contribution_type": {
-              "type": "string"
-            }
-          }
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "creator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "observed_contribution_type": {
+          "type": "string",
+          "minLength": 1
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "position_statement": {
       "type": "object",
@@ -519,13 +550,16 @@
       ],
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "role": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "statement": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         }
       },
       "additionalProperties": false
@@ -544,10 +578,12 @@
           "minLength": 1
         },
         "evidence_type": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "related_origin_candidate": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "description": {
           "type": "string",
@@ -557,13 +593,16 @@
           "type": "object",
           "properties": {
             "work_id": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "section": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "excerpt": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           "additionalProperties": false
@@ -575,7 +614,8 @@
           }
         },
         "submitted_by": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "strength": {
           "type": "string",
