@@ -5,11 +5,12 @@ type: software
 authors:
   - name: "Shidenkai Alpha"
 repository-code: "https://github.com/YOUR-USERNAME/ktp-origin-audit"
-abstract: "A pre-judicial origin audit layer for observing, reviewing, and validating trace claims within the Kazene Trace Protocol ecosystem."
+abstract: "A pre-judicial origin audit layer for observing, reviewing, validating, and multi-wing reviewing trace claims within the Kazene Trace Protocol ecosystem."
 keywords:
   - Kazene Trace Protocol
   - Origin Audit
   - trace claims
+  - Multi-Wing Review
   - AI governance
   - provenance
   - dispute registry
@@ -17,5 +18,5 @@ keywords:
   - royalty OS
   - civilization OS
 license: MIT
-version: "0.1.0"
+version: "0.1.1"
 date-released: "2026-05-21"
