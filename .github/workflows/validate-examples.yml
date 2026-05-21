@@ -54,6 +54,7 @@ jobs:
               Path("examples/blended-influence.example.json"),
               Path("examples/disputed-trace-claim.example.json"),
               Path("examples/allocation-readiness-review.example.json"),
+              Path("examples/multi-wing-review.example.json"),
           ]
 
           allowed_relation_by_type = {
@@ -70,6 +71,14 @@ jobs:
               "blended-influence": "multi_source_influence",
               "disputed-trace-claim": "contested_origin_claim",
               "allocation-readiness-review": "reviewed_trace_claim",
+          }
+
+          expected_source_relation_by_source_type = {
+              "explicit-citation": "explicit_citation",
+              "implicit-absorption": "implicit_absorption",
+              "blended-influence": "blended_influence",
+              "disputed-trace-claim": "disputed_trace_claim",
+              "allocation-readiness-review": "allocation_readiness_review",
           }
 
           failed = False
@@ -120,38 +129,28 @@ jobs:
                   continue
 
               example_type = data.get("example_type")
-              relation_type = data.get("trace_claim", {}).get("relation_type")
-              claim_type = data.get("trace_claim", {}).get("claim_type")
-              confidence = data.get("audit_assessment", {}).get("confidence")
+              is_multi_wing_review = example_type == "multi-wing-review"
+
               is_disputed = data.get("dispute_status", {}).get("is_disputed")
               ready_for_allocation = data.get("allocation_readiness", {}).get("ready_for_allocation_review")
               allocation_approved = data.get("allocation_readiness", {}).get("allocation_approved", False)
+
               not_a_verdict = data.get("governance_notes", {}).get("not_a_verdict")
               not_royalty_allocation = data.get("governance_notes", {}).get("not_royalty_allocation")
-
-              expected_relation = allowed_relation_by_type.get(example_type)
-              if relation_type != expected_relation:
-                  failed = True
-                  print(
-                      f"ERROR: relation_type mismatch in {path}: "
-                      f"expected {expected_relation}, got {relation_type}"
-                  )
-
-              expected_claim_type = expected_claim_type_by_example_type.get(example_type)
-              if claim_type != expected_claim_type:
-                  failed = True
-                  print(
-                      f"ERROR: claim_type mismatch in {path}: "
-                      f"expected {expected_claim_type}, got {claim_type}"
-                  )
-
-              if not isinstance(confidence, (int, float)) or not (0 <= confidence <= 1):
-                  failed = True
-                  print(f"ERROR: confidence must be between 0 and 1 in {path}")
+              not_ownership_determination = data.get("governance_notes", {}).get("not_ownership_determination")
+              not_legal_advice = data.get("governance_notes", {}).get("not_legal_advice")
 
               if not_a_verdict is not True:
                   failed = True
                   print(f"ERROR: governance_notes.not_a_verdict must be true in {path}")
+
+              if not_legal_advice is not True:
+                  failed = True
+                  print(f"ERROR: governance_notes.not_legal_advice must be true in {path}")
+
+              if not_ownership_determination is not True:
+                  failed = True
+                  print(f"ERROR: governance_notes.not_ownership_determination must be true in {path}")
 
               if not_royalty_allocation is not True:
                   failed = True
@@ -175,6 +174,74 @@ jobs:
                       f"ERROR: only allocation-readiness-review examples may set "
                       f"ready_for_allocation_review=true in {path}"
                   )
+
+              if is_multi_wing_review:
+                  source_record = data.get("source_audit_record", {})
+                  source_example_type = source_record.get("example_type")
+                  source_relation_type = source_record.get("relation_type")
+                  expected_source_relation = expected_source_relation_by_source_type.get(source_example_type)
+
+                  if source_relation_type != expected_source_relation:
+                      failed = True
+                      print(
+                          f"ERROR: source_audit_record relation_type mismatch in {path}: "
+                          f"expected {expected_source_relation}, got {source_relation_type}"
+                      )
+
+                  wing_reviews = data.get("wing_reviews", [])
+                  if not wing_reviews:
+                      failed = True
+                      print(f"ERROR: multi-wing-review must include at least one wing review in {path}")
+
+                  for index, wing in enumerate(wing_reviews):
+                      confidence = wing.get("confidence")
+                      if not isinstance(confidence, (int, float)) or not (0 <= confidence <= 1):
+                          failed = True
+                          print(
+                              f"ERROR: wing_reviews[{index}].confidence must be between 0 and 1 in {path}"
+                          )
+
+                  combined_review = data.get("combined_review", {})
+                  overall_recommendation = combined_review.get("overall_recommendation")
+
+                  if overall_recommendation == "ready_for_downstream_review" and ready_for_allocation is not True:
+                      failed = True
+                      print(
+                          f"ERROR: combined_review recommends ready_for_downstream_review, "
+                          f"but allocation_readiness.ready_for_allocation_review is not true in {path}"
+                      )
+
+                  if ready_for_allocation:
+                      failed = True
+                      print(
+                          f"ERROR: multi-wing-review examples must not directly set "
+                          f"ready_for_allocation_review=true in {path}"
+                      )
+
+              else:
+                  relation_type = data.get("trace_claim", {}).get("relation_type")
+                  claim_type = data.get("trace_claim", {}).get("claim_type")
+                  confidence = data.get("audit_assessment", {}).get("confidence")
+
+                  expected_relation = allowed_relation_by_type.get(example_type)
+                  if relation_type != expected_relation:
+                      failed = True
+                      print(
+                          f"ERROR: relation_type mismatch in {path}: "
+                          f"expected {expected_relation}, got {relation_type}"
+                      )
+
+                  expected_claim_type = expected_claim_type_by_example_type.get(example_type)
+                  if claim_type != expected_claim_type:
+                      failed = True
+                      print(
+                          f"ERROR: claim_type mismatch in {path}: "
+                          f"expected {expected_claim_type}, got {claim_type}"
+                      )
+
+                  if not isinstance(confidence, (int, float)) or not (0 <= confidence <= 1):
+                      failed = True
+                      print(f"ERROR: confidence must be between 0 and 1 in {path}")
 
               print(f"OK: {path} passed schema and policy checks.")
 
