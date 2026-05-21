@@ -1,3 +1,45 @@
+## [0.1.2] - 2026-05-21
+
+### Added
+
+- Added architecture overview documentation:
+  - `docs/architecture-overview.md`
+
+### Included
+
+- Added Mermaid diagrams for:
+  - high-level KTP ecosystem architecture
+  - internal Origin Audit layer structure
+  - example trace claim flow
+  - anti-collapse model
+  - Multi-Wing Review position
+
+### Updated
+
+- Updated `README.md` to include:
+  - `docs/architecture-overview.md` in Repository Structure
+  - `docs/architecture-overview.md` in Start Here
+  - Architecture Overview section
+  - v0.1.2 status block
+  - architecture overview references in relationship sections
+
+### Defined
+
+- Origin Audit as the layer between Trace Intelligence Spec and downstream governance.
+- The architectural boundary between:
+  - Origin Audit
+  - Dispute Registry
+  - Allocation Readiness
+  - Royalty OS / Allocation Layer
+- The anti-collapse model preventing unsafe shortcuts such as:
+  - similarity → copying
+  - trace → ownership
+  - readiness → payment approval
+
+### Status
+
+This release extends the Origin Audit layer with architecture overview documentation and Mermaid diagrams, making the repository structure and governance flow easier to understand.
+
 ## [0.1.1] - 2026-05-21
 
 ### Added
