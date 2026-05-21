@@ -1,0 +1,186 @@
+{
+  "example_id": "ktp-origin-audit-blended-influence-001",
+  "example_type": "blended-influence",
+  "protocol": {
+    "name": "Kazene Trace Protocol",
+    "component": "Origin Audit",
+    "version": "0.1.0-draft"
+  },
+  "summary": {
+    "title": "Blended influence from multiple origin candidates",
+    "description": "This example represents a case where a later work appears to reflect influence from multiple earlier sources, without reducing the trace relationship to a single origin."
+  },
+  "trace_claim": {
+    "claim_id": "trace-claim-blended-influence-001",
+    "claim_type": "multi_source_influence",
+    "relation_type": "blended_influence",
+    "claim_statement": "The later work appears to combine structural, conceptual, or stylistic influence from multiple origin candidates.",
+    "origin_candidates": [
+      {
+        "id": "source-work-blended-001",
+        "title": "Original Source A",
+        "creator": "Creator A",
+        "source_type": "article",
+        "publication_status": "published",
+        "reference_url": "https://example.com/source-a",
+        "observed_contribution_type": "structural_framework"
+      },
+      {
+        "id": "source-work-blended-002",
+        "title": "Original Source B",
+        "creator": "Creator B",
+        "source_type": "essay",
+        "publication_status": "published",
+        "reference_url": "https://example.com/source-b",
+        "observed_contribution_type": "conceptual_language"
+      },
+      {
+        "id": "source-work-blended-003",
+        "title": "Original Source C",
+        "creator": "Creator C",
+        "source_type": "specification",
+        "publication_status": "published",
+        "reference_url": "https://example.com/source-c",
+        "observed_contribution_type": "protocol_pattern"
+      }
+    ],
+    "derived_or_later_work": {
+      "id": "later-work-blended-001",
+      "title": "Later Work With Blended Influence",
+      "creator": "Later Creator",
+      "source_type": "article",
+      "publication_status": "published",
+      "reference_url": "https://example.com/later-blended-work"
+    }
+  },
+  "evidence": {
+    "evidence_items": [
+      {
+        "evidence_id": "evidence-001",
+        "evidence_type": "structural_similarity",
+        "related_origin_candidate": "source-work-blended-001",
+        "description": "The later work appears to use a layered structure similar to Source A.",
+        "observed_features": [
+          "layered progression",
+          "separation between observation and judgment",
+          "stepwise escalation model"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "evidence_id": "evidence-002",
+        "evidence_type": "conceptual_overlap",
+        "related_origin_candidate": "source-work-blended-002",
+        "description": "The later work uses conceptual language that resembles Source B.",
+        "observed_features": [
+          "similar terminology around trace culture",
+          "similar framing of uncertainty",
+          "similar distinction between influence and ownership"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "evidence_id": "evidence-003",
+        "evidence_type": "protocol_pattern_similarity",
+        "related_origin_candidate": "source-work-blended-003",
+        "description": "The later work follows a protocol-like structure similar to Source C.",
+        "observed_features": [
+          "structured claim object",
+          "evidence bundle",
+          "review status",
+          "governance notes"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidence_id": "evidence-004",
+        "evidence_type": "source_distribution",
+        "description": "No single origin candidate appears sufficient to explain the later work as a whole.",
+        "observed_features": [
+          "different features point to different candidates",
+          "influence appears distributed across multiple sources",
+          "later work contains synthesis rather than direct reproduction"
+        ],
+        "strength": "strong"
+      }
+    ],
+    "evidence_summary": "The later work appears to reflect a blended influence pattern involving structural, conceptual, and protocol-level similarities across multiple origin candidates."
+  },
+  "audit_assessment": {
+    "confidence": 0.71,
+    "confidence_level": "medium_high",
+    "assessment_status": "observed_with_uncertainty",
+    "assessment_summary": "The evidence suggests blended influence from multiple candidates, but no single source should be treated as the exclusive origin.",
+    "uncertainty_notes": [
+      "Blended influence may involve direct influence, indirect influence, shared discourse, parallel development, or common design patterns.",
+      "This audit does not determine ownership, authorship, legality, or allocation.",
+      "The presence of multiple origin candidates requires careful review before any downstream action.",
+      "Reviewers should avoid collapsing a distributed trace pattern into a single-source verdict."
+    ]
+  },
+  "review_status": {
+    "status": "requires_review",
+    "review_required": true,
+    "review_type": "human_or_multi_wing_review",
+    "review_notes": [
+      "Reviewers should examine each origin candidate separately.",
+      "Reviewers should distinguish structural contribution, conceptual contribution, stylistic contribution, and protocol contribution.",
+      "Reviewers should identify whether the later work is a synthesis, adaptation, derivative work, or independent parallel development.",
+      "Multi-wing review is recommended because blended influence requires multiple interpretive perspectives."
+    ]
+  },
+  "dispute_status": {
+    "is_disputed": false,
+    "dispute_reference": null,
+    "dispute_notes": [
+      "No formal dispute has been registered in this example.",
+      "If one or more origin candidates contest the trace relationship, this case may be escalated to a Dispute Registry."
+    ]
+  },
+  "allocation_readiness": {
+    "ready_for_allocation_review": false,
+    "reason": "Blended influence requires additional contribution analysis before allocation readiness can be considered.",
+    "recommended_next_step": "Prepare a contribution mapping review that distinguishes each candidate's observed role before any allocation-readiness decision."
+  },
+  "contribution_mapping": {
+    "mapping_status": "preliminary",
+    "candidate_roles": [
+      {
+        "origin_candidate": "source-work-blended-001",
+        "observed_role": "structural framework influence",
+        "preliminary_weight": "medium",
+        "allocation_weight": null
+      },
+      {
+        "origin_candidate": "source-work-blended-002",
+        "observed_role": "conceptual language influence",
+        "preliminary_weight": "medium",
+        "allocation_weight": null
+      },
+      {
+        "origin_candidate": "source-work-blended-003",
+        "observed_role": "protocol pattern influence",
+        "preliminary_weight": "high",
+        "allocation_weight": null
+      }
+    ],
+    "notes": [
+      "Preliminary weights are descriptive review signals only.",
+      "They are not allocation percentages.",
+      "Allocation weights must be determined by a separate Allocation Readiness or Royalty OS process."
+    ]
+  },
+  "governance_notes": {
+    "not_a_verdict": true,
+    "not_legal_advice": true,
+    "not_ownership_determination": true,
+    "not_royalty_allocation": true,
+    "principle": "Blended influence should be observed as a distributed trace pattern, not reduced prematurely to a single origin claim."
+  },
+  "metadata": {
+    "created_for": "ktp-origin-audit",
+    "schema_target": "origin-audit-example.schema.json",
+    "created_at": "2026-05-21",
+    "language": "en"
+  }
+}
