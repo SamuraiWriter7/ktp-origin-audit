@@ -1,0 +1,159 @@
+{
+  "example_id": "ktp-origin-audit-allocation-readiness-review-001",
+  "example_type": "allocation-readiness-review",
+  "protocol": {
+    "name": "Kazene Trace Protocol",
+    "component": "Origin Audit",
+    "version": "0.1.0-draft"
+  },
+  "summary": {
+    "title": "Allocation readiness review after structured origin audit",
+    "description": "This example represents a case where a trace claim has been sufficiently organized for downstream allocation-readiness review, while still not performing or approving allocation."
+  },
+  "trace_claim": {
+    "claim_id": "trace-claim-allocation-readiness-001",
+    "claim_type": "reviewed_trace_claim",
+    "relation_type": "allocation_readiness_review",
+    "claim_statement": "The trace relationship has been observed, reviewed, and documented well enough to be considered for downstream allocation-readiness review.",
+    "origin_candidate": {
+      "id": "source-work-allocation-001",
+      "title": "Original Framework Work",
+      "creator": "Original Creator",
+      "source_type": "specification",
+      "publication_status": "published",
+      "reference_url": "https://example.com/original-framework-work"
+    },
+    "derived_or_later_work": {
+      "id": "later-work-allocation-001",
+      "title": "Later Work Using Reviewed Trace Structure",
+      "creator": "Later Creator",
+      "source_type": "implementation_note",
+      "publication_status": "published",
+      "reference_url": "https://example.com/later-reviewed-work"
+    }
+  },
+  "evidence": {
+    "evidence_items": [
+      {
+        "evidence_id": "evidence-001",
+        "evidence_type": "explicit_reference",
+        "description": "The later work includes a direct reference to the origin candidate.",
+        "observed_features": [
+          "direct source link",
+          "named reference to the original framework",
+          "acknowledgement of conceptual influence"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidence_id": "evidence-002",
+        "evidence_type": "structural_alignment",
+        "description": "The later work follows a structure that aligns with the origin candidate's framework.",
+        "observed_features": [
+          "similar layer sequence",
+          "similar separation between trace, review, and allocation",
+          "similar governance framing"
+        ],
+        "strength": "strong"
+      },
+      {
+        "evidence_id": "evidence-003",
+        "evidence_type": "review_record",
+        "description": "The trace claim has undergone preliminary human or multi-wing review.",
+        "observed_features": [
+          "review status recorded",
+          "uncertainty notes documented",
+          "dispute status checked",
+          "allocation caveats preserved"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "evidence_id": "evidence-004",
+        "evidence_type": "dispute_check",
+        "description": "No active dispute is recorded for this example at the time of review.",
+        "observed_features": [
+          "no formal dispute reference",
+          "no competing origin claim recorded",
+          "no unresolved respondent objection recorded"
+        ],
+        "strength": "moderate"
+      }
+    ],
+    "evidence_summary": "The trace claim includes explicit reference, structural alignment, preliminary review records, and no active dispute in this example."
+  },
+  "audit_assessment": {
+    "confidence": 0.82,
+    "confidence_level": "high",
+    "assessment_status": "reviewed_for_allocation_readiness",
+    "assessment_summary": "The trace claim appears sufficiently organized for downstream allocation-readiness review, but this does not mean allocation is approved.",
+    "uncertainty_notes": [
+      "Allocation readiness is not the same as allocation approval.",
+      "This audit does not determine ownership, authorship, legal status, or royalty distribution.",
+      "Contribution weight must be determined by a separate allocation or royalty process.",
+      "If a dispute arises later, allocation review should be paused or reopened."
+    ]
+  },
+  "review_status": {
+    "status": "reviewed",
+    "review_required": true,
+    "review_type": "human_or_multi_wing_review",
+    "review_notes": [
+      "The evidence is organized enough for downstream allocation-readiness consideration.",
+      "Reviewers should confirm that no active dispute exists before escalation.",
+      "Reviewers should preserve the distinction between trace evidence and allocation decision.",
+      "Further governance checks are required before any royalty allocation."
+    ]
+  },
+  "dispute_status": {
+    "is_disputed": false,
+    "dispute_reference": null,
+    "dispute_notes": [
+      "No active dispute is recorded in this example.",
+      "If a dispute is later registered, this readiness status should be reconsidered."
+    ]
+  },
+  "allocation_readiness": {
+    "ready_for_allocation_review": true,
+    "allocation_approved": false,
+    "readiness_status": "ready_for_downstream_review",
+    "reason": "The claim has sufficient structured evidence, review notes, and dispute-status clarification to proceed to a separate allocation-readiness or royalty review process.",
+    "required_before_allocation": [
+      "contribution weighting review",
+      "governance approval",
+      "dispute re-check",
+      "licensing or permission review if applicable",
+      "separate Royalty OS or Allocation Layer decision"
+    ],
+    "recommended_next_step": "Escalate to a dedicated Allocation Readiness or Royalty OS process without treating this audit as an allocation decision."
+  },
+  "contribution_mapping": {
+    "mapping_status": "pre_allocation_review_only",
+    "candidate_roles": [
+      {
+        "origin_candidate": "source-work-allocation-001",
+        "observed_role": "framework and structural influence",
+        "preliminary_weight": "high",
+        "allocation_weight": null
+      }
+    ],
+    "notes": [
+      "The preliminary weight is a descriptive review signal only.",
+      "It is not a royalty percentage.",
+      "Allocation weight must be determined by a separate downstream process."
+    ]
+  },
+  "governance_notes": {
+    "not_a_verdict": true,
+    "not_legal_advice": true,
+    "not_ownership_determination": true,
+    "not_royalty_allocation": true,
+    "principle": "Allocation readiness means a claim may proceed to downstream allocation review; it does not approve payment, ownership, or royalty distribution."
+  },
+  "metadata": {
+    "created_for": "ktp-origin-audit",
+    "schema_target": "origin-audit-example.schema.json",
+    "created_at": "2026-05-21",
+    "language": "en"
+  }
+}
