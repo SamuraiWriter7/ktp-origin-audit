@@ -1,0 +1,122 @@
+{
+  "example_id": "ktp-origin-audit-implicit-absorption-001",
+  "example_type": "implicit-absorption",
+  "protocol": {
+    "name": "Kazene Trace Protocol",
+    "component": "Origin Audit",
+    "version": "0.1.0-draft"
+  },
+  "summary": {
+    "title": "Implicit structural absorption without explicit citation",
+    "description": "This example represents a case where a later work appears to absorb or reproduce structural features of an earlier source without explicit citation or acknowledgement."
+  },
+  "trace_claim": {
+    "claim_id": "trace-claim-implicit-absorption-001",
+    "claim_type": "structural_influence",
+    "relation_type": "implicit_absorption",
+    "claim_statement": "The later work appears to reflect structural influence from the earlier source, but no explicit citation is present.",
+    "origin_candidate": {
+      "id": "source-work-implicit-001",
+      "title": "Original Structural Framework",
+      "creator": "Original Creator",
+      "source_type": "article",
+      "publication_status": "published",
+      "reference_url": "https://example.com/original-structural-framework"
+    },
+    "derived_or_later_work": {
+      "id": "later-work-implicit-001",
+      "title": "Later Work With Similar Structural Pattern",
+      "creator": "Later Creator",
+      "source_type": "article",
+      "publication_status": "published",
+      "reference_url": "https://example.com/later-structural-work"
+    }
+  },
+  "evidence": {
+    "evidence_items": [
+      {
+        "evidence_id": "evidence-001",
+        "evidence_type": "structural_similarity",
+        "description": "The later work uses a similar layered structure, progression, and conceptual ordering to the earlier source.",
+        "observed_features": [
+          "similar three-layer structure",
+          "similar separation between observation, review, and allocation",
+          "similar distinction between trace and judgment"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "evidence_id": "evidence-002",
+        "evidence_type": "conceptual_overlap",
+        "description": "The later work appears to reuse a similar conceptual distinction without direct citation.",
+        "observed_features": [
+          "trace is separated from ownership",
+          "evidence is separated from verdict",
+          "allocation is treated as a downstream process"
+        ],
+        "strength": "moderate"
+      },
+      {
+        "evidence_id": "evidence-003",
+        "evidence_type": "absence_of_explicit_citation",
+        "description": "No direct citation, acknowledgement, or reference to the origin candidate is present in the later work.",
+        "observed_features": [
+          "no reference section citation",
+          "no acknowledgement statement",
+          "no direct source link"
+        ],
+        "strength": "strong"
+      }
+    ],
+    "evidence_summary": "The later work shows structural and conceptual similarity to the origin candidate, but no explicit citation is present."
+  },
+  "audit_assessment": {
+    "confidence": 0.64,
+    "confidence_level": "medium",
+    "assessment_status": "observed_with_uncertainty",
+    "assessment_summary": "There is moderate evidence of structural absorption, but the absence of explicit citation prevents a direct source-reference conclusion.",
+    "uncertainty_notes": [
+      "Structural similarity may result from shared context, common discourse, parallel development, or indirect influence.",
+      "The audit does not prove copying, plagiarism, ownership, or legal infringement.",
+      "The relationship should be treated as a trace hypothesis rather than a verdict.",
+      "Further review is required before any dispute or allocation process."
+    ]
+  },
+  "review_status": {
+    "status": "requires_review",
+    "review_required": true,
+    "review_type": "human_or_multi_wing_review",
+    "review_notes": [
+      "Reviewers should compare structural features rather than isolated wording.",
+      "Reviewers should consider the possibility of common background knowledge.",
+      "Reviewers should avoid treating similarity as proof of intentional use.",
+      "This case is suitable for multi-wing review if downstream dispute or allocation is considered."
+    ]
+  },
+  "dispute_status": {
+    "is_disputed": false,
+    "dispute_reference": null,
+    "dispute_notes": [
+      "No formal dispute has been registered in this example.",
+      "If challenged by either party, this example may be escalated to a Dispute Registry."
+    ]
+  },
+  "allocation_readiness": {
+    "ready_for_allocation_review": false,
+    "reason": "Implicit absorption is not sufficient for allocation without additional review, stronger evidence, and dispute-status clarification.",
+    "recommended_next_step": "Conduct a structured review comparing the origin candidate and later work across multiple trace dimensions."
+  },
+  "governance_notes": {
+    "not_a_verdict": true,
+    "not_legal_advice": true,
+    "not_ownership_determination": true,
+    "not_royalty_allocation": true,
+    "principle": "Implicit absorption may be observed as a trace hypothesis, but it must not be treated as a final judgment."
+  },
+  "metadata": {
+    "created_for": "ktp-origin-audit",
+    "schema_target": "origin-audit-example.schema.json",
+    "created_at": "2026-05-21",
+    "language": "en"
+  }
+}
