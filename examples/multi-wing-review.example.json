@@ -1,0 +1,160 @@
+{
+  "example_id": "ktp-origin-audit-multi-wing-review-001",
+  "example_type": "multi-wing-review",
+  "protocol": {
+    "name": "Kazene Trace Protocol",
+    "component": "Origin Audit",
+    "version": "0.1.1-draft"
+  },
+  "summary": {
+    "title": "Multi-Wing Review of an implicit absorption trace claim",
+    "description": "This example represents a multi-perspective review of an Origin Audit record involving possible implicit structural absorption without explicit citation."
+  },
+  "source_audit_record": {
+    "origin_audit_example_id": "ktp-origin-audit-implicit-absorption-001",
+    "example_type": "implicit-absorption",
+    "trace_claim_id": "trace-claim-implicit-absorption-001",
+    "relation_type": "implicit_absorption",
+    "audit_assessment_status": "observed_with_uncertainty"
+  },
+  "review_context": {
+    "review_id": "multi-wing-review-implicit-001",
+    "review_trigger": "The trace claim involves meaningful structural similarity without explicit citation, requiring multiple review perspectives before any dispute or allocation-readiness escalation.",
+    "review_scope": [
+      "structural similarity",
+      "provenance evidence",
+      "conceptual overlap",
+      "dispute risk",
+      "allocation readiness",
+      "governance safety"
+    ]
+  },
+  "wing_reviews": [
+    {
+      "wing_id": "trace-structure-wing",
+      "wing_name": "Trace Structure Wing",
+      "review_focus": "structural_similarity",
+      "finding": "meaningful_structural_similarity_observed",
+      "confidence": 0.68,
+      "assessment": "The later work shows a similar layered structure, including separation between observation, review, and allocation. The pattern is meaningful enough to preserve as a trace hypothesis.",
+      "uncertainty_notes": [
+        "The similarity may reflect shared discourse or parallel development.",
+        "Structural resemblance alone is not sufficient to determine copying or ownership."
+      ],
+      "recommended_next_step": "Preserve as observed_with_uncertainty and compare against provenance findings."
+    },
+    {
+      "wing_id": "provenance-wing",
+      "wing_name": "Provenance Wing",
+      "review_focus": "citation_and_access_evidence",
+      "finding": "no_explicit_provenance_confirmed",
+      "confidence": 0.54,
+      "assessment": "No explicit citation, acknowledgement, or confirmed access evidence is present in the reviewed record.",
+      "uncertainty_notes": [
+        "Absence of citation does not prove intentional omission.",
+        "No direct access record is available in this example."
+      ],
+      "recommended_next_step": "Do not escalate to allocation-readiness review without stronger provenance evidence."
+    },
+    {
+      "wing_id": "linguistic-conceptual-wing",
+      "wing_name": "Linguistic and Conceptual Wing",
+      "review_focus": "conceptual_overlap",
+      "finding": "moderate_conceptual_overlap_observed",
+      "confidence": 0.61,
+      "assessment": "The later work uses a similar conceptual distinction between trace, ownership, and allocation, but the terminology is not identical.",
+      "uncertainty_notes": [
+        "Conceptual overlap may arise from common field-level discussion.",
+        "The reviewed similarity is stronger at the structural level than at the exact wording level."
+      ],
+      "recommended_next_step": "Treat conceptual overlap as supporting evidence, not as a standalone origin determination."
+    },
+    {
+      "wing_id": "dispute-risk-wing",
+      "wing_name": "Dispute-Risk Wing",
+      "review_focus": "dispute_status_and_escalation_risk",
+      "finding": "no_formal_dispute_currently_registered",
+      "confidence": 0.76,
+      "assessment": "No formal dispute is currently registered in the source audit record, but the claim could become disputed if used for ownership or allocation purposes.",
+      "uncertainty_notes": [
+        "The absence of a current dispute does not guarantee future agreement.",
+        "Escalation may be required if a claimant or respondent contests the record."
+      ],
+      "recommended_next_step": "Keep dispute_status.is_disputed as false, but preserve escalation notes."
+    },
+    {
+      "wing_id": "allocation-readiness-wing",
+      "wing_name": "Allocation-Readiness Wing",
+      "review_focus": "allocation_readiness",
+      "finding": "not_ready_for_allocation_review",
+      "confidence": 0.83,
+      "assessment": "The trace claim is not ready for allocation review because evidence remains uncertain and no direct citation or contribution weighting review is available.",
+      "uncertainty_notes": [
+        "Implicit absorption requires additional review before allocation-readiness can be considered.",
+        "Preliminary trace observation must not be converted into payment or allocation signals."
+      ],
+      "recommended_next_step": "Do not proceed to Allocation Readiness at this stage."
+    },
+    {
+      "wing_id": "governance-wing",
+      "wing_name": "Governance Wing",
+      "review_focus": "safety_boundaries",
+      "finding": "governance_boundaries_preserved",
+      "confidence": 0.9,
+      "assessment": "The reviewed Origin Audit record preserves key governance boundaries and does not present itself as a verdict, legal judgment, ownership determination, or royalty allocation.",
+      "uncertainty_notes": [
+        "Governance fields must remain explicit if the record is reused downstream.",
+        "Any future escalation should preserve the same safety boundaries."
+      ],
+      "recommended_next_step": "Maintain governance safety fields in all downstream handoff packages."
+    }
+  ],
+  "combined_review": {
+    "multi_wing_review_status": "completed",
+    "consensus_level": "partial",
+    "overall_recommendation": "record_as_observed_with_uncertainty",
+    "summary": "Multiple wings identify a meaningful trace hypothesis, especially at the structural level, but provenance evidence is insufficient and allocation-readiness is not recommended.",
+    "key_findings": [
+      "Structural similarity is meaningful but not conclusive.",
+      "No explicit citation or confirmed access evidence is present.",
+      "Conceptual overlap exists but may reflect shared discourse.",
+      "No formal dispute is currently registered.",
+      "The case is not ready for allocation review.",
+      "Governance safety boundaries are preserved."
+    ],
+    "recommended_next_steps": [
+      "Preserve the trace claim as observed_with_uncertainty.",
+      "Do not treat the review as a verdict.",
+      "Do not proceed to allocation-readiness review at this stage.",
+      "Collect additional provenance evidence if the claim becomes disputed.",
+      "Escalate to Dispute Registry if a formal dispute emerges."
+    ]
+  },
+  "allocation_readiness": {
+    "ready_for_allocation_review": false,
+    "allocation_approved": false,
+    "reason": "The Multi-Wing Review found meaningful structural similarity but insufficient provenance evidence and no contribution weighting basis for downstream allocation review.",
+    "recommended_next_step": "Maintain as an Origin Audit record and revisit only if stronger evidence or a formal dispute emerges."
+  },
+  "dispute_status": {
+    "is_disputed": false,
+    "dispute_reference": null,
+    "dispute_notes": [
+      "No formal dispute is currently registered.",
+      "If contested by either party, this record may be escalated to a Dispute Registry."
+    ]
+  },
+  "governance_notes": {
+    "not_a_verdict": true,
+    "not_legal_advice": true,
+    "not_ownership_determination": true,
+    "not_royalty_allocation": true,
+    "principle": "Multi-Wing Review improves audit quality, but it does not create final authority."
+  },
+  "metadata": {
+    "created_for": "ktp-origin-audit",
+    "created_at": "2026-05-21",
+    "language": "en",
+    "intended_release": "v0.1.1"
+  }
+}
