@@ -1,0 +1,592 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/origin-audit-example.schema.json",
+  "title": "Origin Audit Example Schema",
+  "description": "Schema for validating origin audit examples within the Kazene Trace Protocol ecosystem.",
+  "type": "object",
+  "required": [
+    "example_id",
+    "example_type",
+    "protocol",
+    "summary",
+    "trace_claim",
+    "evidence",
+    "audit_assessment",
+    "review_status",
+    "dispute_status",
+    "allocation_readiness",
+    "governance_notes",
+    "metadata"
+  ],
+  "properties": {
+    "example_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "example_type": {
+      "type": "string",
+      "enum": [
+        "explicit-citation",
+        "implicit-absorption",
+        "blended-influence",
+        "disputed-trace-claim",
+        "allocation-readiness-review"
+      ]
+    },
+    "protocol": {
+      "type": "object",
+      "required": [
+        "name",
+        "component",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "Kazene Trace Protocol"
+        },
+        "component": {
+          "type": "string",
+          "const": "Origin Audit"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "title",
+        "description"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "trace_claim": {
+      "type": "object",
+      "required": [
+        "claim_id",
+        "claim_type",
+        "relation_type",
+        "claim_statement",
+        "derived_or_later_work"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_type": {
+          "type": "string",
+          "enum": [
+            "source_reference",
+            "structural_influence",
+            "multi_source_influence",
+            "contested_origin_claim",
+            "reviewed_trace_claim"
+          ]
+        },
+        "relation_type": {
+          "type": "string",
+          "enum": [
+            "explicit_citation",
+            "implicit_absorption",
+            "blended_influence",
+            "disputed_trace_claim",
+            "allocation_readiness_review"
+          ]
+        },
+        "claim_statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claimant": {
+          "$ref": "#/$defs/position_statement"
+        },
+        "origin_candidate": {
+          "$ref": "#/$defs/origin_candidate"
+        },
+        "origin_candidates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/origin_candidate"
+          }
+        },
+        "derived_or_later_work": {
+          "$ref": "#/$defs/work"
+        },
+        "responding_position": {
+          "$ref": "#/$defs/position_statement"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "origin_candidate"
+          ]
+        },
+        {
+          "required": [
+            "origin_candidates"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "evidence_items",
+        "evidence_summary"
+      ],
+      "properties": {
+        "evidence_items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidence_item"
+          }
+        },
+        "evidence_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "audit_assessment": {
+      "type": "object",
+      "required": [
+        "confidence",
+        "confidence_level",
+        "assessment_status",
+        "assessment_summary",
+        "uncertainty_notes"
+      ],
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "confidence_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "medium_high",
+            "high"
+          ]
+        },
+        "assessment_status": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "observed_with_uncertainty",
+            "disputed_and_unresolved",
+            "reviewed_for_allocation_readiness"
+          ]
+        },
+        "assessment_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uncertainty_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "review_status": {
+      "type": "object",
+      "required": [
+        "status",
+        "review_required",
+        "review_type",
+        "review_notes"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "reviewed",
+            "requires_review",
+            "requires_escalation"
+          ]
+        },
+        "review_required": {
+          "type": "boolean"
+        },
+        "review_type": {
+          "type": "string",
+          "enum": [
+            "human_review",
+            "ai_assisted_review",
+            "human_or_multi_wing_review",
+            "multi_wing_review"
+          ]
+        },
+        "review_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "dispute_status": {
+      "type": "object",
+      "required": [
+        "is_disputed",
+        "dispute_reference",
+        "dispute_notes"
+      ],
+      "properties": {
+        "is_disputed": {
+          "type": "boolean"
+        },
+        "dispute_reference": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "registry": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "suggested_dispute_id": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": true
+            }
+          ]
+        },
+        "dispute_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "allocation_readiness": {
+      "type": "object",
+      "required": [
+        "ready_for_allocation_review",
+        "reason",
+        "recommended_next_step"
+      ],
+      "properties": {
+        "ready_for_allocation_review": {
+          "type": "boolean"
+        },
+        "allocation_approved": {
+          "type": "boolean"
+        },
+        "readiness_status": {
+          "type": "string",
+          "enum": [
+            "not_ready",
+            "ready_for_downstream_review"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_before_allocation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommended_next_step": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "contribution_mapping": {
+      "type": "object",
+      "required": [
+        "mapping_status",
+        "candidate_roles",
+        "notes"
+      ],
+      "properties": {
+        "mapping_status": {
+          "type": "string",
+          "enum": [
+            "preliminary",
+            "pre_allocation_review_only"
+          ]
+        },
+        "candidate_roles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "origin_candidate",
+              "observed_role",
+              "preliminary_weight",
+              "allocation_weight"
+            ],
+            "properties": {
+              "origin_candidate": {
+                "type": "string"
+              },
+              "observed_role": {
+                "type": "string"
+              },
+              "preliminary_weight": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              "allocation_weight": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "governance_notes": {
+      "type": "object",
+      "required": [
+        "not_a_verdict",
+        "not_legal_advice",
+        "not_ownership_determination",
+        "not_royalty_allocation",
+        "principle"
+      ],
+      "properties": {
+        "not_a_verdict": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_legal_advice": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_ownership_determination": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_royalty_allocation": {
+          "type": "boolean",
+          "const": true
+        },
+        "principle": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "created_for",
+        "schema_target",
+        "created_at",
+        "language"
+      ],
+      "properties": {
+        "created_for": {
+          "type": "string",
+          "const": "ktp-origin-audit"
+        },
+        "schema_target": {
+          "type": "string",
+          "const": "origin-audit-example.schema.json"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "en",
+            "ja"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "work": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "creator",
+        "source_type",
+        "publication_status",
+        "reference_url"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "creator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "publication_status": {
+          "type": "string"
+        },
+        "reference_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "origin_candidate": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/work"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "observed_contribution_type": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "position_statement": {
+      "type": "object",
+      "required": [
+        "id",
+        "role",
+        "statement"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "statement": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence_item": {
+      "type": "object",
+      "required": [
+        "evidence_id",
+        "evidence_type",
+        "description",
+        "strength"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_type": {
+          "type": "string"
+        },
+        "related_origin_candidate": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "work_id": {
+              "type": "string"
+            },
+            "section": {
+              "type": "string"
+            },
+            "excerpt": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "observed_features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "submitted_by": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "weak",
+            "moderate",
+            "strong"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
