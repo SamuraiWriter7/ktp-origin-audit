@@ -1,0 +1,152 @@
+{
+  "example_id": "ktp-origin-audit-disputed-trace-claim-001",
+  "example_type": "disputed-trace-claim",
+  "protocol": {
+    "name": "Kazene Trace Protocol",
+    "component": "Origin Audit",
+    "version": "0.1.0-draft"
+  },
+  "summary": {
+    "title": "Disputed trace claim requiring escalation",
+    "description": "This example represents a case where a trace relationship is claimed by one party but contested or uncertain, requiring structured review and possible escalation to a Dispute Registry."
+  },
+  "trace_claim": {
+    "claim_id": "trace-claim-disputed-001",
+    "claim_type": "contested_origin_claim",
+    "relation_type": "disputed_trace_claim",
+    "claim_statement": "One party claims that the later work reflects structural influence from an earlier source, while the relationship remains contested or insufficiently resolved.",
+    "claimant": {
+      "id": "claimant-001",
+      "role": "origin_claimant",
+      "statement": "The later work appears to reproduce the core structure and conceptual sequence of the earlier source."
+    },
+    "origin_candidate": {
+      "id": "source-work-disputed-001",
+      "title": "Claimed Origin Work",
+      "creator": "Claimed Origin Creator",
+      "source_type": "article",
+      "publication_status": "published",
+      "reference_url": "https://example.com/claimed-origin-work"
+    },
+    "derived_or_later_work": {
+      "id": "later-work-disputed-001",
+      "title": "Contested Later Work",
+      "creator": "Later Creator",
+      "source_type": "article",
+      "publication_status": "published",
+      "reference_url": "https://example.com/contested-later-work"
+    },
+    "responding_position": {
+      "id": "response-001",
+      "role": "respondent_or_later_creator",
+      "statement": "The later work was independently developed and reflects common discourse rather than direct influence from the claimed origin work."
+    }
+  },
+  "evidence": {
+    "evidence_items": [
+      {
+        "evidence_id": "evidence-001",
+        "evidence_type": "structural_similarity",
+        "description": "The claimant identifies similarities in the sequence, layered argument structure, and separation between trace, review, and allocation.",
+        "observed_features": [
+          "similar layered progression",
+          "similar distinction between trace and judgment",
+          "similar downstream allocation framing"
+        ],
+        "submitted_by": "claimant-001",
+        "strength": "moderate"
+      },
+      {
+        "evidence_id": "evidence-002",
+        "evidence_type": "absence_of_explicit_citation",
+        "description": "The later work does not explicitly cite or acknowledge the claimed origin work.",
+        "observed_features": [
+          "no citation found",
+          "no acknowledgement found",
+          "no direct reference link found"
+        ],
+        "submitted_by": "claimant-001",
+        "strength": "strong"
+      },
+      {
+        "evidence_id": "evidence-003",
+        "evidence_type": "independent_development_claim",
+        "description": "The respondent claims that the later work was developed independently from common background concepts.",
+        "observed_features": [
+          "respondent asserts independent development",
+          "similar ideas may exist in broader discourse",
+          "no direct access evidence is provided in this example"
+        ],
+        "submitted_by": "response-001",
+        "strength": "moderate"
+      },
+      {
+        "evidence_id": "evidence-004",
+        "evidence_type": "insufficient_access_evidence",
+        "description": "The available evidence does not clearly establish whether the later creator accessed or relied on the claimed origin work.",
+        "observed_features": [
+          "no confirmed reading history",
+          "no direct citation",
+          "no communication record linking the works"
+        ],
+        "submitted_by": "origin-audit-review",
+        "strength": "moderate"
+      }
+    ],
+    "evidence_summary": "The case includes moderate structural similarity and lack of citation, but also an independent development claim and insufficient evidence of direct access."
+  },
+  "audit_assessment": {
+    "confidence": 0.55,
+    "confidence_level": "medium",
+    "assessment_status": "disputed_and_unresolved",
+    "assessment_summary": "The trace claim is plausible enough to document but not strong enough to treat as resolved. The case should be escalated if downstream dispute handling or allocation review is considered.",
+    "uncertainty_notes": [
+      "Structural similarity alone is not sufficient to determine origin.",
+      "The absence of citation may be relevant but does not prove intentional omission.",
+      "The respondent's independent development claim must be preserved in the audit record.",
+      "This example should not be used as a verdict, ownership determination, or allocation basis."
+    ]
+  },
+  "review_status": {
+    "status": "requires_escalation",
+    "review_required": true,
+    "review_type": "human_or_multi_wing_review",
+    "review_notes": [
+      "Reviewers should preserve both claimant and respondent positions.",
+      "Reviewers should not collapse a contested trace claim into a single conclusion.",
+      "Additional evidence may be required before any allocation-readiness review.",
+      "This case is suitable for Dispute Registry escalation if a formal dispute is opened."
+    ]
+  },
+  "dispute_status": {
+    "is_disputed": true,
+    "dispute_reference": {
+      "registry": "Dispute Registry",
+      "status": "not_yet_registered",
+      "suggested_dispute_id": "dispute-trace-claim-001"
+    },
+    "dispute_notes": [
+      "The trace relationship is contested.",
+      "Origin Audit records the dispute state but does not resolve it.",
+      "Formal resolution should occur in a separate Dispute Registry or governance process."
+    ]
+  },
+  "allocation_readiness": {
+    "ready_for_allocation_review": false,
+    "reason": "The trace claim is disputed and unresolved. Allocation review should not proceed until the dispute status is clarified.",
+    "recommended_next_step": "Escalate to Dispute Registry or conduct additional multi-wing review before considering allocation readiness."
+  },
+  "governance_notes": {
+    "not_a_verdict": true,
+    "not_legal_advice": true,
+    "not_ownership_determination": true,
+    "not_royalty_allocation": true,
+    "principle": "A disputed trace claim must be documented without being prematurely converted into judgment or allocation."
+  },
+  "metadata": {
+    "created_for": "ktp-origin-audit",
+    "schema_target": "origin-audit-example.schema.json",
+    "created_at": "2026-05-21",
+    "language": "en"
+  }
+}
