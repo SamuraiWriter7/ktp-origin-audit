@@ -1,0 +1,186 @@
+name: Validate Origin Audit Examples
+
+on:
+  push:
+    paths:
+      - ".github/workflows/validate-examples.yml"
+      - "schemas/**"
+      - "examples/**"
+  pull_request:
+    paths:
+      - ".github/workflows/validate-examples.yml"
+      - "schemas/**"
+      - "examples/**"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema
+
+      - name: Debug file tree
+        run: |
+          pwd
+          find . -maxdepth 4 -type f | sort
+
+      - name: Validate origin audit examples
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          from jsonschema import Draft202012Validator, FormatChecker
+
+          print("=== Validating ktp-origin-audit examples ===")
+
+          schema_path = Path("schemas/origin-audit-example.schema.json")
+
+          example_paths = [
+              Path("examples/explicit-citation.example.json"),
+              Path("examples/implicit-absorption.example.json"),
+              Path("examples/blended-influence.example.json"),
+              Path("examples/disputed-trace-claim.example.json"),
+              Path("examples/allocation-readiness-review.example.json"),
+          ]
+
+          allowed_relation_by_type = {
+              "explicit-citation": "explicit_citation",
+              "implicit-absorption": "implicit_absorption",
+              "blended-influence": "blended_influence",
+              "disputed-trace-claim": "disputed_trace_claim",
+              "allocation-readiness-review": "allocation_readiness_review",
+          }
+
+          expected_claim_type_by_example_type = {
+              "explicit-citation": "source_reference",
+              "implicit-absorption": "structural_influence",
+              "blended-influence": "multi_source_influence",
+              "disputed-trace-claim": "contested_origin_claim",
+              "allocation-readiness-review": "reviewed_trace_claim",
+          }
+
+          failed = False
+
+          def load_json(path: Path):
+              global failed
+
+              if not path.exists():
+                  print(f"ERROR: File not found: {path}")
+                  failed = True
+                  return None
+
+              try:
+                  with path.open("r", encoding="utf-8") as f:
+                      return json.load(f)
+              except json.JSONDecodeError as e:
+                  print(f"ERROR: Invalid JSON in {path}: {e}")
+                  failed = True
+                  return None
+
+          schema = load_json(schema_path)
+          if schema is None:
+              print("Validation failed: schema could not be loaded.")
+              sys.exit(1)
+
+          validator = Draft202012Validator(schema, format_checker=FormatChecker())
+
+          for path in example_paths:
+              print(f"\n--- Validating {path} ---")
+              data = load_json(path)
+
+              if data is None:
+                  continue
+
+              errors = sorted(
+                  validator.iter_errors(data),
+                  key=lambda e: list(e.absolute_path)
+              )
+
+              if errors:
+                  failed = True
+                  print(f"ERROR: Schema validation failed for {path}")
+                  for error in errors:
+                      location = "/".join(str(x) for x in error.absolute_path)
+                      if not location:
+                          location = "<root>"
+                      print(f"  - {location}: {error.message}")
+                  continue
+
+              example_type = data.get("example_type")
+              relation_type = data.get("trace_claim", {}).get("relation_type")
+              claim_type = data.get("trace_claim", {}).get("claim_type")
+              confidence = data.get("audit_assessment", {}).get("confidence")
+              is_disputed = data.get("dispute_status", {}).get("is_disputed")
+              ready_for_allocation = data.get("allocation_readiness", {}).get("ready_for_allocation_review")
+              allocation_approved = data.get("allocation_readiness", {}).get("allocation_approved", False)
+              not_a_verdict = data.get("governance_notes", {}).get("not_a_verdict")
+              not_royalty_allocation = data.get("governance_notes", {}).get("not_royalty_allocation")
+
+              expected_relation = allowed_relation_by_type.get(example_type)
+              if relation_type != expected_relation:
+                  failed = True
+                  print(
+                      f"ERROR: relation_type mismatch in {path}: "
+                      f"expected {expected_relation}, got {relation_type}"
+                  )
+
+              expected_claim_type = expected_claim_type_by_example_type.get(example_type)
+              if claim_type != expected_claim_type:
+                  failed = True
+                  print(
+                      f"ERROR: claim_type mismatch in {path}: "
+                      f"expected {expected_claim_type}, got {claim_type}"
+                  )
+
+              if not isinstance(confidence, (int, float)) or not (0 <= confidence <= 1):
+                  failed = True
+                  print(f"ERROR: confidence must be between 0 and 1 in {path}")
+
+              if not_a_verdict is not True:
+                  failed = True
+                  print(f"ERROR: governance_notes.not_a_verdict must be true in {path}")
+
+              if not_royalty_allocation is not True:
+                  failed = True
+                  print(f"ERROR: governance_notes.not_royalty_allocation must be true in {path}")
+
+              if is_disputed and ready_for_allocation:
+                  failed = True
+                  print(
+                      f"ERROR: disputed examples must not be ready for allocation review in {path}"
+                  )
+
+              if allocation_approved is True:
+                  failed = True
+                  print(
+                      f"ERROR: Origin Audit examples must not approve allocation in {path}"
+                  )
+
+              if example_type != "allocation-readiness-review" and ready_for_allocation:
+                  failed = True
+                  print(
+                      f"ERROR: only allocation-readiness-review examples may set "
+                      f"ready_for_allocation_review=true in {path}"
+                  )
+
+              print(f"OK: {path} passed schema and policy checks.")
+
+          if failed:
+              print("\nValidation failed.")
+              sys.exit(1)
+
+          print("\nAll Origin Audit examples passed validation.")
+          PY
