@@ -1,63 +1,42 @@
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-This repository follows a simple versioning model during the early Origin Audit phase.
-
----
-
-## [0.1.0] - 2026-05-21
+## [0.1.1] - 2026-05-21
 
 ### Added
 
-- Initial `ktp-origin-audit` repository structure.
-- Added five core Origin Audit examples:
-  - `examples/explicit-citation.example.json`
-  - `examples/implicit-absorption.example.json`
-  - `examples/blended-influence.example.json`
-  - `examples/disputed-trace-claim.example.json`
-  - `examples/allocation-readiness-review.example.json`
-- Added JSON Schema:
-  - `schemas/origin-audit-example.schema.json`
-- Added GitHub Actions validation workflow:
-  - `.github/workflows/validate-examples.yml`
-- Added review and methodology documents:
-  - `docs/review-guidelines.md`
-  - `docs/audit-methodology.md`
-- Added ecosystem relationship documents:
-  - `docs/relationship-to-trace-intelligence-spec.md`
-  - `docs/relationship-to-dispute-registry.md`
-  - `docs/relationship-to-allocation-readiness.md`
-  - `docs/multi-wing-review-model.md`
-- Added v1.0 graduation criteria:
-  - `docs/origin-audit-v1.0-graduation-criteria.md`
+- Added a new Multi-Wing Review example:
+  - `examples/multi-wing-review.example.json`
+
+### Updated
+
+- Updated `schemas/origin-audit-example.schema.json` to support the `multi-wing-review` example type.
+- Added schema definitions for:
+  - `source_audit_record`
+  - `review_context`
+  - `wing_reviews`
+  - `combined_review`
+- Updated `.github/workflows/validate-examples.yml` to include:
+  - `examples/multi-wing-review.example.json`
+  - Multi-Wing Review-specific validation checks
+  - wing-level confidence validation
+  - source audit record relation consistency checks
 
 ### Defined
 
-- Origin Audit as a pre-judicial observation and review layer.
-- Core principle: `Audit examples are not verdicts.`
-- Governance safety boundaries:
+- Multi-Wing Review as a structured review model for re-evaluating existing Origin Audit records from multiple perspectives.
+- The distinction between:
+  - Multi-Wing Review and final judgment
+  - review consensus and verdict
+  - readiness recommendation and allocation approval
+
+### Safety Rules
+
+- Multi-Wing Review examples must preserve governance boundaries:
   - `not_a_verdict: true`
   - `not_legal_advice: true`
   - `not_ownership_determination: true`
   - `not_royalty_allocation: true`
-- Distinction between:
-  - trace and ownership
-  - evidence and verdict
-  - dispute and resolution
-  - allocation readiness and allocation approval
-
-### Validation
-
-- Added automated validation for:
-  - JSON syntax
-  - schema compliance
-  - relation type consistency
-  - claim type consistency
-  - confidence score range
-  - dispute/allocation safety rules
-  - governance safety fields
+- Multi-Wing Review examples must not directly approve allocation.
+- Multi-Wing Review examples must not convert review consensus into final authority.
 
 ### Status
 
-This release is an experimental draft intended to establish the minimum working structure of the Origin Audit layer within the Kazene Trace Protocol ecosystem.
+This release extends the Origin Audit layer with a concrete Multi-Wing Review example and validation support, making the review model more operational while preserving the pre-judicial boundary of the repository.
