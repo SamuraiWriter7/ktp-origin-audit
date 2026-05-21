@@ -2,7 +2,7 @@
 
 **Pre-judicial origin audit layer for observing trace claims before judgment, dispute handling, or allocation.**
 
-`ktp-origin-audit` provides origin audit examples, review guidelines, validation rules, and methodology documents for the Kazene Trace Protocol ecosystem.
+`ktp-origin-audit` provides origin audit examples, review guidelines, validation rules, methodology documents, and Multi-Wing Review support for the Kazene Trace Protocol ecosystem.
 
 This repository does not determine ownership, authorship, legality, plagiarism, or royalty allocation.  
 Instead, it provides structured ways to observe, describe, review, and validate trace-related claims before they are escalated to dispute resolution or allocation systems.
@@ -14,7 +14,7 @@ Instead, it provides structured ways to observe, describe, review, and validate 
 The purpose of this repository is to provide a safe pre-judicial layer for origin and trace analysis.
 
 In AI-generated, AI-assisted, and structurally influenced works, origin is often difficult to determine directly.  
-A trace claim may involve explicit citation, implicit absorption, blended influence, disputed lineage, or allocation-readiness review.
+A trace claim may involve explicit citation, implicit absorption, blended influence, disputed lineage, allocation-readiness review, or Multi-Wing Review.
 
 This repository provides examples, schemas, review principles, and methodology documents for handling such cases without prematurely turning observation into judgment.
 
@@ -41,6 +41,7 @@ It is a structured observation layer that helps reviewers, systems, and future p
 - uncertainty and judgment
 - dispute preparation and dispute resolution
 - allocation readiness and allocation approval
+- review consensus and final authority
 
 This separation is essential for a healthy trace culture.
 
@@ -55,6 +56,7 @@ This separation is essential for a healthy trace culture.
 - a review culture guide for trace claims
 - a validation target for structured audit examples
 - a methodology layer for origin and trace review
+- a Multi-Wing Review demonstration layer
 - a bridge between Kazene Trace Protocol and downstream governance layers
 
 It is designed to support:
@@ -89,7 +91,7 @@ Any such decision should happen only after additional review, dispute handling, 
 
 ## Example Categories
 
-This repository currently focuses on five core audit example categories:
+This repository currently focuses on six core audit and review example categories:
 
 ```text
 explicit-citation
@@ -97,6 +99,7 @@ implicit-absorption
 blended-influence
 disputed-trace-claim
 allocation-readiness-review
+multi-wing-review
 ```
 
 ### Explicit Citation
@@ -123,6 +126,12 @@ A case where evidence is reviewed to determine whether a trace claim may be read
 
 This does not mean allocation is approved.
 
+### Multi-Wing Review
+
+A case where an existing Origin Audit record is reviewed through multiple independent review perspectives, such as trace structure, provenance, conceptual overlap, dispute risk, allocation readiness, and governance safety.
+
+Multi-Wing Review improves audit quality, but it does not create final authority.
+
 ---
 
 ## Repository Structure
@@ -146,7 +155,8 @@ ktp-origin-audit/
 │   ├── implicit-absorption.example.json
 │   ├── blended-influence.example.json
 │   ├── disputed-trace-claim.example.json
-│   └── allocation-readiness-review.example.json
+│   ├── allocation-readiness-review.example.json
+│   └── multi-wing-review.example.json
 ├── schemas/
 │   └── origin-audit-example.schema.json
 └── .github/
@@ -159,6 +169,7 @@ This structure defines `ktp-origin-audit` as a pre-judicial origin audit layer.
 The repository includes:
 
 - validated audit examples
+- a concrete Multi-Wing Review example
 - a reusable JSON Schema
 - an automated validation workflow
 - review guidelines
@@ -192,31 +203,34 @@ Recommended reading order:
 6. `examples/allocation-readiness-review.example.json`  
    Example showing that allocation readiness is not allocation approval.
 
-7. `schemas/origin-audit-example.schema.json`  
-   JSON Schema used to validate Origin Audit examples.
+7. `examples/multi-wing-review.example.json`  
+   Example of reviewing an existing Origin Audit record through multiple independent review wings.
 
-8. `.github/workflows/validate-examples.yml`  
-   GitHub Actions workflow for validating example structure and governance safety rules.
+8. `schemas/origin-audit-example.schema.json`  
+   JSON Schema used to validate Origin Audit and Multi-Wing Review examples.
 
-9. `docs/review-guidelines.md`  
-   Review principles for reading audit records safely.
+9. `.github/workflows/validate-examples.yml`  
+   GitHub Actions workflow for validating example structure, Multi-Wing Review consistency, and governance safety rules.
 
-10. `docs/audit-methodology.md`  
+10. `docs/review-guidelines.md`  
+    Review principles for reading audit records safely.
+
+11. `docs/audit-methodology.md`  
     Step-by-step methodology for conducting origin audits.
 
-11. `docs/relationship-to-trace-intelligence-spec.md`  
+12. `docs/relationship-to-trace-intelligence-spec.md`  
     Explains how Origin Audit operationalizes the broader Trace Intelligence Spec.
 
-12. `docs/relationship-to-dispute-registry.md`  
+13. `docs/relationship-to-dispute-registry.md`  
     Explains how disputed trace claims should be escalated without being resolved inside Origin Audit.
 
-13. `docs/relationship-to-allocation-readiness.md`  
+14. `docs/relationship-to-allocation-readiness.md`  
     Explains how Origin Audit prepares records for downstream allocation-readiness review without approving allocation.
 
-14. `docs/multi-wing-review-model.md`  
+15. `docs/multi-wing-review-model.md`  
     Defines a multi-perspective review model for complex or uncertain trace claims.
 
-15. `docs/origin-audit-v1.0-graduation-criteria.md`  
+16. `docs/origin-audit-v1.0-graduation-criteria.md`  
     Defines the criteria for promoting this repository toward Origin Audit v1.0.
 
 ---
@@ -255,6 +269,7 @@ The Trace Intelligence Spec defines the structural language of trace relationshi
 - schema validation
 - governance safety rules
 - escalation boundaries
+- Multi-Wing Review support
 
 Recommended distinction:
 
@@ -366,6 +381,7 @@ A healthy trace culture requires:
 - caution before allocation
 - preservation of respondent positions
 - distinction between readiness and approval
+- distinction between review consensus and final authority
 
 Origin Audit exists to make this culture practical.
 
@@ -387,8 +403,11 @@ The workflow checks:
 - relation type consistency
 - claim type consistency
 - confidence score range
+- wing-level confidence score range
+- source audit record consistency
 - governance safety fields
 - dispute/allocation safety rules
+- Multi-Wing Review consistency rules
 
 Validation confirms structural consistency.
 
@@ -428,6 +447,8 @@ dispute → guilt
 absence of citation → misconduct
 influence → allocation
 trace → verdict
+multi-wing agreement → final authority
+review consensus → legal certainty
 ```
 
 These shortcuts are structurally unsafe.
@@ -441,14 +462,29 @@ Origin Audit exists to prevent premature collapse from observation into judgment
 Current status:
 
 ```text
-Version: v0.1.0-draft
+Version: v0.1.1
 Layer: Origin Audit
 Ecosystem: Kazene Trace Protocol
 Role: Pre-judicial observation and review layer
 Validation: GitHub Actions passing
+Release status: Multi-Wing Review example extension
 ```
 
-This repository is experimental and intended for open development.
+`ktp-origin-audit` v0.1.1 extends the initial Origin Audit layer with a concrete Multi-Wing Review example and validation support.
+
+This release includes:
+
+- six validated Origin Audit and review examples
+- a reusable JSON Schema with Multi-Wing Review support
+- an automated validation workflow
+- review guidelines
+- audit methodology
+- relationship documents for Trace Intelligence Spec, Dispute Registry, Allocation Readiness, and Multi-Wing Review
+- v1.0 graduation criteria
+
+This version should be treated as an early stable extension of the Origin Audit layer, not as a final standard.
+
+Future versions may expand negative examples, handoff schemas, compliance tests, architecture diagrams, and integration models for downstream governance systems.
 
 ---
 
@@ -460,8 +496,9 @@ Possible future extensions include:
 - compliance test runner
 - Dispute Registry handoff schema
 - Allocation Readiness handoff schema
-- Multi-Wing Review example files
+- additional Multi-Wing Review example files
 - confidence scoring guidance
+- architecture overview diagram
 - relationship to C2PA-style provenance
 - relationship to RSL and royalty protocols
 - Origin Audit v1.0 release checklist completion
@@ -478,7 +515,7 @@ See `LICENSE` for details.
 
 ## Citation
 
-If you reference this repository, please cite it using `CITATION.cff` once available.
+If you reference this repository, please cite it using `CITATION.cff`.
 
 ---
 
@@ -486,7 +523,7 @@ If you reference this repository, please cite it using `CITATION.cff` once avail
 
 `ktp-origin-audit` exists to protect trace culture from premature judgment.
 
-It provides structured examples, review principles, methodology documents, schema validation, and governance boundaries for observing origin-related claims before they become disputes, allocation decisions, or legal assertions.
+It provides structured examples, review principles, methodology documents, schema validation, Multi-Wing Review support, and governance boundaries for observing origin-related claims before they become disputes, allocation decisions, or legal assertions.
 
 > Observe first.  
 > Review carefully.  
