@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "ktp-origin-audit"
+message: "If you use or reference this repository, please cite it as below."
+type: software
+authors:
+  - name: "Shidenkai Alpha"
+repository-code: "https://github.com/YOUR-USERNAME/ktp-origin-audit"
+abstract: "A pre-judicial origin audit layer for observing, reviewing, and validating trace claims within the Kazene Trace Protocol ecosystem."
+keywords:
+  - Kazene Trace Protocol
+  - Origin Audit
+  - trace claims
+  - AI governance
+  - provenance
+  - dispute registry
+  - allocation readiness
+  - royalty OS
+  - civilization OS
+license: MIT
+version: "0.1.0-draft"
+date-released: "2026-05-21"
